@@ -1,12 +1,13 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var routes = require("./index");
+// Mengimpor routes.js
+var routes = require("./routes");
 routes(app);
 
 app.listen(port, () => {

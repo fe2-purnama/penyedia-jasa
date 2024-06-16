@@ -1,28 +1,56 @@
 "use strict";
 
 var response = require("../res"); // Mengimpor res.js
-var connection = require("../library/database"); // Mengimpor database.js
+var connection = require("../connection"); // Mengimpor database.js
 
-exports.index = function (req, res) {
-  response.ok("Aplikasi Rest API berjalan!", res); // Menggunakan response.ok dari res.js
-};
-
-//Post Data
-exports.dataRegister = function (req, res) {
+exports.register = function (req, res) {
   let username = req.body.username;
   let email = req.body.email;
   let password = req.body.password;
   let no_telpon = req.body.no_telpon;
-  const query = `INSERT INTO register (username, email, password, no_telpon) VALUES (?,?,?,?)`;
+
+  const queryObat = `INSERT INTO tbl_register (username, email, password, no_telpon) VALUES (?,?,?,?)`;
   connection.query(
-    query,
+    queryObat,
     [username, email, password, no_telpon],
-    function (err, rows, fields) {
+    function (err, result) {
       if (err) {
         console.log(err);
+        res.status(500).send({ message: "Gagal menginput data obat" });
       } else {
-        response.ok("Berhasil menambahkan data register", res);
+        // Mendapatkan id_obat
+        const regis_id = result.insertId;
+        // Query untuk menambahkan data ke tabel inventori
+        const queryInventori = `INSERT INTO tbl_users (regis_id,username,email,no_telpon) VALUES (?, ?, ?, ?)`;
+        connection.query(
+          queryInventori,
+          [regis_id, username, email, no_telpon],
+          function (err, result) {
+            if (err) {
+              console.log(err);
+              res.status(500).send({ message: "Register Gagal" });
+            } else {
+              res.status(200).send({
+                message: "Register berhasil"
+              });
+            }
+          }
+        );
       }
     }
   );
 };
+
+//   const query = `INSERT INTO tbl_register (username, email, password, no_telpon) VALUES (?,?,?,?)`;
+//   connection.query(
+//     query,
+//     [username, email, password, no_telpon],
+//     function (err, rows, fields) {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         response.ok("Berhasil menambahkan data register", res);
+//       }
+//     }
+//   );
+// };

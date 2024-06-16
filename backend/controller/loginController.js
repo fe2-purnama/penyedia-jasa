@@ -1,16 +1,11 @@
 "use strict";
 
-var response = require("../res"); // Mengimpor res.js
-var connection = require("../library/database"); // Mengimpor database.js
+var response = require("../res");
+var connection = require("../connection");
 
-exports.index = function (req, res) {
-  response.ok("Aplikasi Rest API berjalan!", res); // Menggunakan response.ok dari res.js
-};
-
-exports.dataLogin = function (req, res) {
+exports.Login = function (req, res) {
   let email = req.body.email;
   let password = req.body.password;
-
   const query = `
   INSERT INTO tbl_login (regis_id, email, password)
   SELECT regis_id, email, password
