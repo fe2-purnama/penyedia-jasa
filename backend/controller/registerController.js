@@ -9,21 +9,21 @@ exports.register = function (req, res) {
   let password = req.body.password;
   let no_telpon = req.body.no_telpon;
 
-  const queryObat = `INSERT INTO tbl_register (username, email, password, no_telpon) VALUES (?,?,?,?)`;
+  const queryRegis = `INSERT INTO tbl_register (username, email, password, no_telpon) VALUES (?,?,?,?)`;
   connection.query(
-    queryObat,
+    queryRegis,
     [username, email, password, no_telpon],
     function (err, result) {
       if (err) {
         console.log(err);
-        res.status(500).send({ message: "Gagal menginput data obat" });
+        res.status(500).send({ message: "Register Gagal" });
       } else {
-        // Mendapatkan id_obat
+        // Mendapatkan regis_id
         const regis_id = result.insertId;
-        // Query untuk menambahkan data ke tabel inventori
-        const queryInventori = `INSERT INTO tbl_users (regis_id,username,email,no_telpon) VALUES (?, ?, ?, ?)`;
+        // Query untuk menambahkan data ke tabel user
+        const queryUser = `INSERT INTO tbl_users (regis_id,username,email,no_telpon) VALUES (?, ?, ?, ?)`;
         connection.query(
-          queryInventori,
+          queryUser,
           [regis_id, username, email, no_telpon],
           function (err, result) {
             if (err) {
@@ -31,7 +31,7 @@ exports.register = function (req, res) {
               res.status(500).send({ message: "Register Gagal" });
             } else {
               res.status(200).send({
-                message: "Register berhasil"
+                message: "Register berhasil",
               });
             }
           }
