@@ -11,7 +11,7 @@ exports.Services = function (req, res) {
       if (error) {
         console.log(error);
       } else {
-        response.ok(rows, res); // Menggunakan response.ok untuk mengirim data
+        response.success(rows, res); // Menggunakan response.success untuk mengirim data
       }
     }
   );
@@ -26,7 +26,7 @@ exports.ServicesById = function (req, res) {
       console.log(error);
       response.error("Failed to retrieve home service data", res);
     } else {
-      response.ok(rows, res);
+      response.success(rows, res);
     }
   });
 };
@@ -47,7 +47,7 @@ exports.ServicesPost = function (req, res) {
         console.log(error);
         response.error("Gagal menambah data", res);
       } else {
-        response.ok("Data berhasil di input", res);
+        response.success("Data berhasil di input", res);
       }
     }
   );
@@ -71,12 +71,12 @@ exports.ServicePut = function (req, res) {
         response.error("Terjadi kesalahan saat update data", res);
       } else {
         if (rows.affectedRows === 0) {
-          // Tidak ada data yang cocok, kirim pesan kesalahan
+        
           console.log("Data tidak ditemukan!!");
-          response.ok(`Data dengan id ${id} tidak ditemukan!!`, res);
+          response.success(`Data dengan id ${id} tidak ditemukan!!`, res);
         } else {
           // Data berhasil Update
-          response.ok("Data berhasil diupdate", res);
+          response.success("Data berhasil diupdate", res);
         }
       }
     }
@@ -95,7 +95,7 @@ exports.ServicesDelete = function (req, res) {
       console.log(error);
       response.error("Gagal menghapus data", res);
     } else {
-      response.ok("Data berhasil di hapus!", res);
+      response.success("Data berhasil di hapus!", res);
     }
   });
 };

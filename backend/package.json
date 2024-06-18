@@ -1,17 +1,29 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Website Penyedia Jasa Rest API Backend",
+  "description": "Rest API Website Penyedia Jasa",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+
+  "keywords": [
+    "rest",
+    "api",
+    "node",
+    "js"
+  ],
   "author": "Marlo Duha",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "cookie-session": "^2.1.0",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
+    "ip": "^2.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "md5": "^2.3.0",
+    "morgan": "^1.10.0",
     "mysql": "^2.18.1"
   }
 }
