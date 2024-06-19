@@ -5,6 +5,7 @@ module.exports = function (app) {
   var RegisterController = require("./controller/RegisterController");
   var ServicesController = require("./controller/ServiceController");
   var OrdersController = require("./controller/OrderController");
+  var ForgotpassController = require("./controller/ForgotpassController");
 
   //route controller
   app.route("/").get(HomeController.index);
@@ -31,4 +32,14 @@ module.exports = function (app) {
   app.route("/putOrder/:id").put(OrdersController.OrderPut);
   //DELETE
   app.route("/deleteOrder/:id").delete(OrdersController.OrderDelete);
+
+  //route Forgot Password Controller
+  // Route for handling forgot password request
+  app.route("/forgot-password").post(ForgotpassController.ForgotPassword);
+
+  // Route for verifying password reset token
+  app.route("/reset/:token").get(ForgotpassController.VerifyToken);
+
+  // Route for handling password reset
+  app.route("/reset/:token").post(ForgotpassController.ResetPassword);
 };

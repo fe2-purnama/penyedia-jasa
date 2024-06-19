@@ -1,3 +1,4 @@
+var express = require("express"); // import express
 var connection = require("../connection");
 var mysql = require("mysql");
 var md5 = require("md5");
@@ -5,14 +6,31 @@ var response = require("../res");
 var jwt = require("jsonwebtoken");
 var config = require("../config/secret_tokens");
 var ip = require("ip");
-const { query } = require("express");
+var session = require("express-session");
+const verification = require("./verification");
+var bodyParser = require("body-parser");
+var app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use(
+  session({
+    secret:
+      "dasufdfdsfjdijsfiujgffosf9ewuirfejfiphg[spk-9eruagifjsfipjfri324iheoh3452hioewhr4o3h5irwfiiohfwo543fjsihfe4375847ghudsgfyu4t38tufsgvyut3w487g",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
+
+// Middleware Fuction
 exports.register = function (req, res) {
   var post = {
     username: req.body.username,
     email: req.body.email,
     password: md5(req.body.password),
-    no_telpon: req.body.no_telpon
+    no_telpon: req.body.no_telpon,
   };
 
   var query = `SELECT email FROM ?? WHERE ?? = ?`;
@@ -53,7 +71,7 @@ exports.register = function (req, res) {
 exports.login = function (req, res) {
   var post = {
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
   };
 
   var query = `SELECT * FROM ?? WHERE ??=? AND ??=? `;
@@ -62,7 +80,7 @@ exports.login = function (req, res) {
     "email",
     post.email,
     "password",
-    md5(post.password)
+    md5(post.password),
   ];
 
   query = mysql.format(query, table);
@@ -72,13 +90,13 @@ exports.login = function (req, res) {
     } else {
       if (rows.length == 1) {
         var token = jwt.sign({ rows }, config.secret, {
-          expiresIn: 1500
+          expiresIn: 1500,
         });
         user_id = rows[0].user_id;
         var data = {
           user_id: user_id,
           access_token: token,
-          devices_ip: ip.address()
+          devices_ip: ip.address(),
         };
         var query = `INSERT INTO ?? SET ?`;
         var table = ["tbl_login"];
@@ -92,7 +110,7 @@ exports.login = function (req, res) {
               success: true,
               message: "Token JWT added successfully",
               token: token,
-              currUsers: data.id
+              currUsers: data.id,
             });
           }
         });
@@ -101,6 +119,10 @@ exports.login = function (req, res) {
       }
     }
   });
+};
+
+exports.dashboardAdmin = function (req, res) {
+  response.success("Selamat Datang Di Dashboard Admin", res);
 };
 
 exports.dashboard = function (req, res) {
