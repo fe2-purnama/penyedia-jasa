@@ -2,10 +2,11 @@ var mysql = require("mysql");
 
 //Koneksi Database
 const conn = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "db_home_services"
+  host: "educalab.id",
+  port: 3307,
+  user: "1r8WXUjtRic7zouP",
+  password: "dr82YoxEOq8oIC8F",
+  database: "u8HyGwhbMmvbg4Dr"
 });
 
 conn.connect((err) => {
