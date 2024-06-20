@@ -1,0 +1,57 @@
+.dashboard-home {
+  padding: 20px;
+  margin-left: 220px; /* Menggeser konten ke kanan sidebar */
+}
+
+h2,
+h3 {
+  color: #333;
+}
+
+.summary {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.stats {
+  margin-bottom: 20px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.stat-item {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-item h4 {
+  margin-bottom: 10px;
+}
+
+.recent-activities {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.recent-activities ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.recent-activities li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}

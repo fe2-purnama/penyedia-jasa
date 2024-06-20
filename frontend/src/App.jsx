@@ -11,6 +11,10 @@ import Home from "./components/Pages/Home";
 import ServiceAC from "./components/Pages/ServiceAC";
 import ContactUs from "./components/Pages/ContactUs";
 import FormOrderAC from "./components/Pages/FormOrderAC";
+import Sidebar from "./Pages/Sidebar";
+import Dashboard from "./Pages/Dashboard";
+import Users from "./Pages/Users";
+import Settings from "./Pages/Settings";
 
 const MemoizedLayout = memo(() => (
   <div>
@@ -18,6 +22,12 @@ const MemoizedLayout = memo(() => (
     <Home />
     <Footer />
   </div>
+));
+
+const MemorizedSidebar = memo(() = > (
+  <div>
+    <Sidebar />
+    </div>
 ));
 
 const MemoizedServiceACLayout = memo(() => (
@@ -36,11 +46,15 @@ const MemoizedContactUsLayout = memo(() => (
   </div>
 ));
 
+
 function App() {
   return (
     <div>
       <Router>
         <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

@@ -1,0 +1,32 @@
+.sidebar {
+  position: fixed;
+  top: 60px; /* Di bawah navbar */
+  left: 0; /* Menggeser sidebar ke kiri */
+  width: 200px;
+  height: calc(100vh - 60px); /* Mengurangi tinggi navbar */
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd; /* Menggunakan border-right agar tampak terpisah dari konten utama */
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.sidebar a:hover {
+  background-color: #ddd;
+}
